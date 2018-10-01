@@ -1,8 +1,31 @@
+" PLUGIN MANAGER
+" This will auto install vim-plug if empty(glob('~/.vim/autoload/plug.vim'))
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+endif
+
+" VimPlug Settings
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+call plug#end()
+
 "Normal Vim settings
+let mapleader=";"
 set nocompatible "don't try to be compatible with vi; needed for some plugins
 set ruler "show file stats
 set encoding=utf-8 
 set background=dark
+
+" Window Navigation
+map <leader>j <C-W>j
+map <leader>k <C-W>k
+map <leader>h <C-W>h
+map <leader>l <C-W>l
+map <leader>= <C-W>=
 
 "relative numbers when in normal mode, absolute numbers in visual mode
 :set number relativenumber
