@@ -1,0 +1,33 @@
+"Normal Vim settings
+set nocompatible "don't try to be compatible with vi; needed for some plugins
+set ruler "show file stats
+set encoding=utf-8 
+set background=dark
+
+"relative numbers when in normal mode, absolute numbers in visual mode
+:set number relativenumber
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
+
+"SEARCH FUNCTIONALITY
+set hlsearch
+set ignorecase
+set smartcase
+set showmatch
+map <leader><space> :let @/=''<cr> "clear search
+set incsearch "incremental search
+
+"Python settings
+"https://wiki.python.org/moin/Vim
+syntax on
+filetype indent plugin on
+set tabstop=4 "four-space tab indent width is prefered coding style for Python
+set expandtab "insersts spaces instad of <TAB>
+set shiftwidth=4 "use < and > for visual mode to block indent/unindent regions
+set softtabstop=4
+set modelines=0 "used to set specific opts for each language; set to 0 for security
+set textwidth=70 "pep-8
+
