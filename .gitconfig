@@ -1,0 +1,37 @@
+[push]
+	default = upstream
+[merge]
+	conflictstyle = diff3
+[user]
+	email = paikai.anthony@gmail.com
+	name = Anthony Paikai
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[alias]
+co = checkout
+cob = checkout -b
+st = status -s
+cm = commit -m
+cma = commit -a -m
+# log commands
+ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+lsd = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+lsrd = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+d = diff --word-diff
+dlc = diff --cached HEAD^
+#greps
+f = "!git ls-files | grep -i" #find file path
+gr = grep -Ii #grep code base
+gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f" #grep from root
+#merge aliases
+ours = "!f() { git co --ours $@ && git add $@; }; f"
+theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+la = "!git config -l | grep alias | cut -c 7-"
+
+
+
