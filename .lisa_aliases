@@ -1,0 +1,16 @@
+#!/bin/bash
+
+alias lisaclient="cd /Users/apaikai/lisa/frontend/client"
+alias lisacstool="cd /Users/apaikai/lisa/frontend/cs_base"
+alias lisamanager="cd /Users/apaikai/lisa/frontend/manager_base"
+alias lisapath="cd /Users/apaikai/lisa"
+alias lisavenv="deactivate; lisapath; source venv/bin/activate; export PYTHONPATH=$PWD/modules"
+lisadeploy () {
+	lisapath;
+	if (($# != 2))
+	then
+		echo "Usage: lisabuild [lisa|lex] {stage}"
+		exit 1
+	fi
+	python deploy.py $1_master -p $2
+}
