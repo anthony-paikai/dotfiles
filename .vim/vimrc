@@ -1,4 +1,3 @@
-" PLUGIN MANAGER
 " This will auto install vim-plug if empty(glob('~/.vim/autoload/plug.vim'))
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -11,14 +10,58 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'tpope/vim-commentary'
+Plug 'w0rp/ale'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'mileszs/ack.vim'
 call plug#end()
 
 "Normal Vim settings
 let mapleader=";"
 set nocompatible "don't try to be compatible with vi; needed for some plugins
 set ruler "show file stats
-set encoding=utf-8 
-set background=dark
+set encoding=utf-8
+
+"Ale settings
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'python': ['isort', 'pep8'],
+\}
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_fix_on_save = 1
+
+"For theme colors to work
+set termguicolors
+if !has('gui_running')
+    set t_Co=256
+endif
+
+" Fast save
+nnoremap <leader>w :w!<cr>
+
+" Fast save
+nnoremap <leader>q :q<cr>
+
+" Set foldmethod
+noremap <leader>z :set foldmethod=indent<cr> :call ToggleFold()<cr>
+let $unrol=0
+function ToggleFold()
+if $unrol==0
+    :exe "normal zM"
+    let $unrol=1
+else
+    :exe "normal zR"
+    let $unrol=0
+endif
+endfunction
+
+if &term =~# '^screen'
+   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
 
 " Window Navigation
 map <leader>j <C-W>j
@@ -26,6 +69,11 @@ map <leader>k <C-W>k
 map <leader>h <C-W>h
 map <leader>l <C-W>l
 map <leader>= <C-W>=
+map <leader>J <C-W>J
+map <leader>K <C-W>K
+map <leader>H <C-W>H
+map <leader>L <C-W>L
+
 
 "relative numbers when in normal mode, absolute numbers in visual mode
 :set number relativenumber
@@ -43,6 +91,13 @@ set showmatch
 map <leader><space> :let @/=''<cr> "clear search
 set incsearch "incremental search
 
+" Ack settings
+cnoreabbrev Ack Ack!
+map <leader>a :Ack<CR>
+vnoremap <Leader>a y:Ack <C-r>=fnameescape(@")<CR><CR>")
+vnoremap <Leader>f y:AckFile! <C-r>=fnameescape(@")<CR><CR>")
+ " Switch CWD to path of open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
 "Python settings
 "https://wiki.python.org/moin/Vim
 syntax on
@@ -53,4 +108,3 @@ set shiftwidth=4 "use < and > for visual mode to block indent/unindent regions
 set softtabstop=4
 set modelines=0 "used to set specific opts for each language; set to 0 for security
 set textwidth=70 "pep-8
-

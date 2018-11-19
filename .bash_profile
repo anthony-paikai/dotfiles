@@ -1,4 +1,6 @@
 PATH=$PATH:/usr/local/sbin
+# config setup
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # Enable tab completion
 source ~/.lisa_aliases
 source ~/.cms_aliases
@@ -21,3 +23,13 @@ export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
+
+fzcd() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+fzvim() {
+   local file
+   file=$(fzf +m -q "$1") && vim "$file"
+}
