@@ -6,7 +6,7 @@ Prereqs:
 
 To install in $HOME directory under the alias `config`:  
 
-```curl -Lks http://bit.do/gener1k-dotfiles```
+```curl -Lks http://bit.do/gener1k-dotfiles | /bin/bash```
 
 From there use `config` instead of `git` in the home directory and treat it like a normal git repo.
 
