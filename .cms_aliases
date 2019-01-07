@@ -1,10 +1,13 @@
 # CMS
-alias cmscelery="rabbitmq-server -detached; cmsenv && celery -A celery_init worker --loglevel=debug"
+alias cmscelery="cmsenv && celery -A celery_init worker --loglevel=debug"
 alias cmsenv="deactivate; source /Users/apaikai/Development/cms-env/bin/activate && cmspath"
 alias cmskill="kill \$(lsof -i:8000 | grep '[p]ython') | awk '{print \$2}'"
 alias cmsmake="cmsenv && python manage.py makemigrations --noinput"
 alias cmsmigrate="cmsenv && python manage.py migrate --noinput"
 alias cmspath="cd /Users/apaikai/Development/cms/247"
-alias cmsserver="cmskill; cmsenv && python manage.py runserver --insecure"
+alias cmsserver="cmsenv && python manage.py runserver --insecure"
 alias cmsshell="cmsenv && python manage.py shell_plus"
 
+# Appointmnet scheduler
+alias aspath="cd /Users/apaikai/Development/cms/247/js_apps/cms/lead_manager"
+alias asbuild="aspath && npm run watch"

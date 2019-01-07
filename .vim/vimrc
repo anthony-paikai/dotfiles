@@ -28,7 +28,7 @@ set encoding=utf-8
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
-\   'python': ['isort', 'pep8'],
+\   'python': ['isort', 'autopep8'],
 \}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
@@ -45,9 +45,9 @@ nnoremap <leader>w :w!<cr>
 " Fast save
 nnoremap <leader>q :q<cr>
 
-" Set foldmethod
 noremap <leader>z :set foldmethod=indent<cr> :call ToggleFold()<cr>
 let $unrol=0
+" Set foldmethod
 function ToggleFold()
 if $unrol==0
     :exe "normal zM"
@@ -107,4 +107,4 @@ set expandtab "insersts spaces instad of <TAB>
 set shiftwidth=4 "use < and > for visual mode to block indent/unindent regions
 set softtabstop=4
 set modelines=0 "used to set specific opts for each language; set to 0 for security
-set textwidth=70 "pep-8
+set textwidth=79 "pep-8
