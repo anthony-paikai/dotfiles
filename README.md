@@ -1,5 +1,5 @@
-# 2
-# Easy Install
+
+### Easy Install
 Prereqs:
 - curl
 - grep
