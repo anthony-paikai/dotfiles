@@ -1,4 +1,3 @@
-# 2
 # Easy Install
 Prereqs:
 - curl
